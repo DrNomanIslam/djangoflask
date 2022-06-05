@@ -1,13 +1,27 @@
 <html>
 <head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">
+
     <script>
         function submit() {
             document.forms[0].submit()
         }
+    
+
+        function daily() {
+            window.open('/hrms/daily')
+        }
+
+        function weekly() {
+            window.open('/hrms/weekly')
+        }
     </script>
-    <h1 align="center">Human Resource Management System</h1>
+    <h1 align="center" >Human Resource Management System</h1>
 </head>
 <body>
+    <button class="btn btn-danger" style="cursor:hand" onclick="daily()">Daily Report</button>
+    <button class="btn btn-success" style="cursor:hand" onclick="weekly()">Weekly Report</button>
     <br><br><br>
     <center>
     {{message}}
@@ -23,8 +37,12 @@
                 <th>Date</th>
                 <th>Time In</th>
                 <th>Time Out</th>
+                <th>Hours</th>
             </tr>
+            
+
             {% for a in attendance %}
+            
             <tr>
                 <td>
                     {{a.date | date:'Y-m-d'}}
@@ -35,12 +53,17 @@
                 <td>
                     {{a.time_out | date:'H:i'}}
                 </td>
+                <td>
+                    {{a.hours|floatformat:2 }}
+                </td>
             </tr>
-
+            
             {% endfor %}
 
 
         </table>
+
+        Total Hours: {{ total|floatformat:2 }}
     </center>
 </body>
 </html>
