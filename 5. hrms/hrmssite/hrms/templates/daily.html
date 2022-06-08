@@ -2,15 +2,16 @@
 <head>
     {% load static %}  
     <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
-
+<br><br>
     <h1 align="center" >Daily attendance report</h1>
+    <p align="center" >{{ dt}}</p>
 </head>
 <body>
     <center>
-    <button class='btn btn-primary' style="cursor:hand" onclick="javascript:window.close()">Close</button>
-    <br><br><br>
     
-    <br><br><br>           
+    <button class='btn btn-primary' style="cursor:hand" onclick="javascript:window.close()">Close</button>    
+    <br><br>
+    <br>           
         <table style="width:700px" border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <th>Employee Id</th>
@@ -22,7 +23,7 @@
             {% for a in attendance %}
             <tr>
                 <td>
-                    {{a.emp_id}}
+                    {{a.emp_id.emp_id}}
                 </td>
                 <td>
                     {{a.date | date:'Y-m-d'}}
@@ -43,6 +44,12 @@
 
 
         </table>
+        <br><br>
+        <a href="/hrms/daily/2/{{dt}}">Previous</a> |
+        <a href="/hrms/daily">Today</a> |
+        <a href="/hrms/daily/1/{{dt}}">Next</a> |
+        <a href="javascript: window.close()">Close</a> |
+        <a href="javascript:window.print()">Print</a>
     </center>
 </body>
 </html>

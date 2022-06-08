@@ -1,6 +1,7 @@
 <html>
 <head>    
     <h1 align="center" >Weekly attendance report</h1>
+    <p align="center">Week starting - {{dt}}</p>
     {% load static %}  
     <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
 </head>
@@ -21,7 +22,7 @@
             {% for a in attendance %}
             <tr>
                 <td>
-                    {{a.emp_id}}
+                    {{a.emp_id.emp_id}}
                 </td>
                 <td>
                     {{a.date | date:'Y-m-d'}}
@@ -42,6 +43,14 @@
 
 
         </table>
+    </center>
+    <br><br>
+    <center>
+    <a href="/hrms/weekly/2/{{dt}}">Previous</a> |
+    <a href="/hrms/weekly">Current Week</a> |
+    <a href="/hrms/weekly/1/{{dt}}">Next</a> |
+    <a href="javascript: window.close()">Close</a> |
+    <a href="javascript:window.print()">Print</a>
     </center>
 </body>
 </html>
