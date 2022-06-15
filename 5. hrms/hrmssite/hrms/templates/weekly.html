@@ -7,13 +7,13 @@
 </head>
 <body>
     <center>
-    <button class='btn btn-primary' style="cursor:hand" onclick="javascript:window.close()">Close</button>
-    <br><br><br>
     
     <br><br><br>           
         <table style="width:700px" border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Department</th>
                 <th>Date</th>
                 <th>Time In</th>
                 <th>Time Out</th>
@@ -22,7 +22,13 @@
             {% for a in attendance %}
             <tr>
                 <td>
-                    {{a.emp_id.emp_id}}
+                    {{a.employee.emp_id}}
+                </td>
+                <td>
+                    {{a.employee.emp_name}}
+                </td>
+                <td>
+                    {{a.employee.department.dept_name}}
                 </td>
                 <td>
                     {{a.date | date:'Y-m-d'}}
@@ -49,7 +55,7 @@
     <a href="/hrms/weekly/2/{{dt}}">Previous</a> |
     <a href="/hrms/weekly">Current Week</a> |
     <a href="/hrms/weekly/1/{{dt}}">Next</a> |
-    <a href="javascript: window.close()">Close</a> |
+    <a href="/hrms/manage">Back</a> |
     <a href="javascript:window.print()">Print</a>
     </center>
 </body>

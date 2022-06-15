@@ -11,28 +11,14 @@
             document.forms[0].submit()
         }
     
-
-        function daily() {
-            window.open('/hrms/daily')
-        }
-
-        function weekly() {
-            window.open('/hrms/weekly')
-        }
-
-        function payroll() {
-            window.open('/hrms/payroll')
-        }
     </script>
-    <h1 align="center" >Human Resource Management System</h1>
+    <h1 class="alert alert-success" align="center" ><br>Human Resource Management System<br><br></h1>
 </head>
 <body>
-    <button class="btn btn-danger" style="cursor:hand" onclick="daily()">Daily Report</button>
-    <button class="btn btn-success" style="cursor:hand" onclick="weekly()">Weekly Report</button>
-    <button class="btn btn-info" style="cursor:hand" onclick="payroll()">Payroll Report</button>
     <br><br><br>
     <center>
     {{message}}
+
     <br><br><br>
     
         <form method="post" action="/hrms/">            
@@ -74,21 +60,5 @@
         Total Hours: {{ total|floatformat:2 }}
     </center>
 
-    <br><br><br>
-
-    <b>Select an employee to see its time sheet</b>
-    <center>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Employees
-                <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu">
-            {% for e in emp_list %}
-              <li><a target="_blank" href="/hrms/employee/{{e.emp_id}}">{{e.emp_name}}</a></li>            
-            {% endfor%}
-            </ul>
-          </div>
-    </center>
 </body>
 </html>
