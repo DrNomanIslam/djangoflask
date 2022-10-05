@@ -1,0 +1,42 @@
+<html>
+<body>
+<title>Research Management Tool</title>
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{%static '/app/bootstrap/css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title>Welcome to Research Management Tool</title>
+
+    <style>
+      input, select  {
+        width: 250px;
+      }
+      }
+    </style>
+</head>
+
+{% include "nav.html" %}
+
+<h1 align="center">Add/Edit a research<br><br></h1>
+{% if msg %}
+<p class="alert alert-success">{{msg}}</p>
+{% endif %}
+<br><br>
+<center>
+<button style="width:100px" class="btn btn-primary" onclick="window.location.href='/app/index'">Back</button>
+</center>
+<br><br>
+<form method="post" action="/app/add">
+	{% csrf_token %}
+	<table	style="width:600px" align="center" class="table">
+        <input type="hidden" name="p_id" value="{{id}}">
+		{{form}}
+	</table>
+	<br>
+	<p align="center">
+	<input style="width:100px" class="btn btn-default" value='Save' type="submit">
+	</p>
+</form>
+</body>
+</html>

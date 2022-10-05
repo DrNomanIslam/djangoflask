@@ -1,0 +1,31 @@
+<table align="center" class="table table-condensed">
+    <tr>
+        <th>Authors</th>
+        <th>Title</th>
+        <th>Journal</th>
+        <th>Year of publication</th>
+        <th>Volume</th>
+        <th>Issue</th>
+        <th>pp.</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+{% for p in pubs %}
+
+    <tr>
+      <td>
+      {% for a in p.authors.all %}
+        {{a.first_name}}&nbsp;<a href='/app/index/author/{{a.last_name}}'> {{a.last_name}}</a>;&nbsp;
+      {% endfor %}
+    </td>
+        <td>{{p.title}}</td>
+        <td>{{p.journal }}</td>
+        <td><a href='/app/index/year/{{p.year_of_publication}}'>{{p.year_of_publication}}</a></td>
+        <td>{{p.volume }}</td>
+        <td>{{p.issue }}</td>
+        <td>{{ p.pp }}</td>
+        <td><a href="/app/edit/{{p.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+        <td><a href="/app/delete/{{p.id}}"><span class="glyphicon glyphicon-remove"></span></a></td>
+    </tr>
+{% endfor %}
+</table>

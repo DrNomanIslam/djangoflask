@@ -1,0 +1,64 @@
+{% load my_filters %}
+
+<html>
+<head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">     
+    <h1 align="center" class="alert alert-success" ><br>Login page<br><br></h1>
+    <script src="{%static '/js/jquery.min.js' %}"></script>
+    <script>
+        function login() {
+            var id = $('#id').val();
+            var pwd = $('#pwd').val();
+            $.ajax({
+                url: '/hrms/authenticate',
+                data: {
+                    'id': id,
+                    'pwd': pwd
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.auth) {
+                        document.location.href='/hrms/manage'
+                    }else{
+                        $('#login_details').html('<p align="center"><font color="red">Please provide a valid user name and password</font></p>')
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <br><br>
+    <p id="login_details" style="text-align:center;">Enter user Id and password to login</p>
+    <br><br>
+    <div class="container">
+        <div class="row" >
+            <div class="col-2" style="text-align: right;"> </div>
+          <div class="col-4" style="text-align: right;">
+            User ID
+          </div>
+          <div class="col-6">
+            <input type="text" id="id">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2" style="text-align: right;"> </div>
+        <div class="col-4" style="text-align: right;">
+          Password
+        </div>
+        <div class="col-6">
+          <input type="password" id="pwd">
+        </div>
+      </div>
+    </div>
+    <br>
+    <p align="center">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" onclick='login()' class="btn btn-primary">Login</button>
+    </p>
+
+</body>
+</html>

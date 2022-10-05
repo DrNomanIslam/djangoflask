@@ -1,0 +1,56 @@
+<html>
+<head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">    
+    <script src="{%static '/js/jquery.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="{%static '/js/bootstrap.min.js' %}"></script>
+
+<style>
+    label {
+        font-weight: normal;
+    }
+
+    input, select {
+        width: 200px;
+    }
+</style>
+
+    <h1 class="alert alert-success" align="center" ><br>New Department<br><br></h1>
+</head>
+<body>
+    <center>
+    {{message}}
+
+    <br><br>
+        
+        <form method="post" action="/hrms/department/new">  
+        
+            {% csrf_token %}
+            
+            <center>
+
+                    {% for err in form.non_field_errors %}
+                    <p style="text-color:red">{{ err }}</p>
+                    {% endfor %}
+
+            </center>
+            
+            <div class="fieldWrapper">
+                {{ form.dept_id.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.dept_id.id_for_label }}">Department Id:</label>
+                {{ form.dept_id }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.dept_name.errors }}
+                <label style='width: 150px;; text-align: left;' for="{{ form.dept_name.id_for_label }}">Department Name:</label>
+                {{ form.dept_name }}
+            </div>
+
+
+        <button class="btn btn-success" type="submit">Submit</button>&nbsp;<button class="btn btn-info" onclick="javascript:window.location.href='/hrms/manage'">Back</button>
+        </form>      
+    </center>
+</body>
+</html>

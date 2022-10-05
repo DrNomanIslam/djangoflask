@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<center>
+<form action="/weather_app/" method="post">
+	{% csrf_token %}
+    {{ form }}
+	<br>
+	<input value='Get Weather' type='submit'>
+</form>
+
+<br><br>
+Weather for <font color='blue'><b>{{city}}</b></font>
+<br><br>
+
+{% if error == '' %}
+<table>
+<tr>
+      <td>Temperature (in kelvin unit) = {{ temperature }}</td>
+</tr>
+<tr>
+      <td>Atmospheric pressure (in hPa unit) = {{ pressure }}</td>
+</tr>
+<tr>
+      <td>Humidity (in percentage) = {{ humidity }}</td>
+</tr>
+<tr>
+      <td>Description = {{ description }}</td>
+</tr>
+</table>
+{% else %}
+<p>{{error}}
+{% endif %}
+
+</center>
+</body>
+</html>

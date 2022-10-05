@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{%static '/app/bootstrap/css/bootstrap.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <script src="{%static '/js/jquery.min.js' %}"></script>
+    <title>Welcome to Research Management Tool</title>
+</head>
+<body>
+{% include "nav.html" %}
+
+<h1 align="center">List of publications</h1><br><br>
+{% if msg %}
+<div class="alert alert-success">{{msg}}</div>
+{% endif %}
+<div class="container">
+
+  Search by title: <input type="text" id="search">
+  <br><br>
+
+  <script>
+
+
+  $("#search").on('input',search_pubs);
+  
+  function search_pubs() {
+        var keyword = $('#search').val();
+        $.ajax({
+            url: '/app/search',
+            data: {
+                'keyword': keyword
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#publications').html(data.rendered_table);
+            }
+        });
+
+    }
+
+    //$(search_pubs);
+  </script>
+
+  <div id="publications">
+    {% include "publications.html" %}
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">    
+    <script src="{%static '/js/jquery.min.js' %}"></script>
+    <script src="{%static '/js/bootstrap.min.js' %}"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <br><br><br>
+    <h1 align="center">TimeSheet</h1>
+</head>
+
+<body>
+    <center>
+    <br><br>
+    <button class='btn btn-primary' style="cursor:hand" onclick="javascript:window.location.href='/hrms/manage'">Back</button>
+    <button class='btn btn-success' style="cursor:hand" onclick="javascript:window.location.href='/hrms/bar/{{emp_id}}'">Print My Bar Code</button>
+    <button class='btn btn-danger' style="cursor:hand" onclick="javascript:window.location.href='/hrms/attendance/{{emp_id}}'">New Attendance</button>
+
+    <br><br>
+    Timesheet for {{ emp_id}} - {{emp_name}}
+    <br><br>
+    {{ message }}
+    
+    <table style="width:700px" class="table table-condensed">
+        <tr>
+            <th>Date</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Hours</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        
+
+        {% for a in attendance %}
+        
+        <tr>
+            <td>
+                {{a.date | date:'Y-m-d'}}
+            </td>
+            <td>
+                {{a.time_in | date:'H:i'}}
+            </td>
+            <td>
+                {{a.time_out | date:'H:i'}}
+            </td>
+            <td>
+                {{a.hours|floatformat:2 }}
+            </td>
+            <td><a href="/hrms/timesheet/{{emp_id}}/{{a.date| date:'Y-m-d'}}/edit"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td><a href="/hrms/timesheet/{{emp_id}}/{{a.date| date:'Y-m-d'}}/delete"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+        </tr>
+        
+        {% endfor %}
+
+    </table>
+    Total Hours: {{total | floatformat:2}}
+</center>
+
+</body>
+</html>

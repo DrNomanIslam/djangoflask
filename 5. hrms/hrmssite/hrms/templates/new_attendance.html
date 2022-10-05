@@ -1,0 +1,59 @@
+<html>
+<head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">    
+    <script src="{%static '/js/jquery.min.js' %}"></script>    
+    <script src="{%static '/js/bootstrap.min.js' %}"></script>
+    
+
+    <h1 class="alert alert-success" align="center" ><br>Attendance Form<br><br></h1>
+
+    <style>
+        input, select {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    {{message}}
+
+    <br><br>
+        
+        <form method="post" action="/hrms/attendance/{{emp_id}}">
+            {% csrf_token %}
+            <div class="fieldWrapper">
+                {{ form.employee.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.employee.id_for_label }}">Employee:</label>
+                {{ form.employee }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.date.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.date.id_for_label }}">Date:</label>
+                {{ form.date }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.time_in.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.time_in.id_for_label }}">Time In:</label>
+                {{ form.time_in }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.time_out.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.time_out.id_for_label }}">Time Out:</label>
+                {{ form.time_out }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.hours }}
+            </div>
+
+        
+        <button class="btn btn-success" type="submit">Submit</button>&nbsp;&nbsp;<button onclick='window.location.href="/hrms/manage"' class="btn btn-primary">Back</button>
+        </form>
+
+        
+    </center>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<html>
+<head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">    
+    <script src="{%static '/js/jquery.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="{%static '/js/bootstrap.min.js' %}"></script>
+
+    
+    
+    
+
+
+    <h1 class="alert alert-success" align="center" ><br>Employee Form<br><br></h1>
+
+    <style>
+        input, select {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <span style='display:inline' id="val_results">{{message}}</span>
+
+    <br><br>
+        
+        <form method="post" action="/hrms/employee/new">          
+            {% csrf_token %}
+            <div class="fieldWrapper">
+                {{ form.emp_id.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.emp_id.id_for_label }}">Employee Id:</label>
+                {{ form.emp_id }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.emp_name.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.emp_name.id_for_label }}">Employee Name:</label>
+                {{ form.emp_name }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.department.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.emp_id.id_for_label }}">Department:</label>
+                {{ form.department }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.address.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.address.id_for_label }}">Address:</label>
+                {{ form.address }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.email.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.gender.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.gender.id_for_label }}">Gender:</label>
+                {{ form.gender }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.joining.errors }}
+                <label style='width: 150px; text-align: left;' for="{{ form.joining.id_for_label }}">Joining:</label>
+                {{ form.joining }}
+            </div>
+
+        
+        <button class="btn btn-success" type="submit">Submit</button>&nbsp;&nbsp;<button onclick='javascript:window.location.href="/hrms/manage"' class="btn btn-primary">Back</button>
+        </form>               
+        
+    </center>
+
+    <script>
+
+        $("#id_emp_id").on('input',function () {
+            var emp_id = $(this).val();
+            $.ajax({
+                url: '/hrms/validate_emp_id',
+                data: {
+                    'emp_id': emp_id
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.is_taken) {
+                        $('#val_results').html('<p style="display:inline;color:red;">An employee with this Id already exist</p>')
+                    }else{
+                        $('#val_results').html('<p style="display:inline;color:black">Employee Id is available</p>')
+                    }
+                }
+            });
+
+        });
+      </script>
+</body>
+</html>

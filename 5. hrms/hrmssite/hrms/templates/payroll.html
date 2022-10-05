@@ -1,0 +1,50 @@
+{% load my_filters %}
+
+<html>
+<head>
+    <style>
+        th {
+            
+            font-weight: bold;
+        }
+
+        th, td {
+            text-align: center;
+        }
+    </style>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css' %}">
+    <br><br>
+    <h1 align="center">Payroll Report</h1>
+    <p align="center" >{{ message }}</p>
+</head>
+
+<body>
+    <center>
+        <br>
+        <button class='btn btn-primary' style="cursor:hand" onclick="javascript:window.location.href='/hrms/manage'">Back</button>    
+        <br><br>
+    <table border='1' style="width:1000px">
+        <tr>
+            <th>Employee Id</th><th>Employee Name</th><th>Week 1 regular</th><th>Week 1 Overtime</th><th>Total Week 1</th><th>Week 2 regular</th><th>Week 2 Overtime</th><th>Total Week 2</th>
+        </tr>
+        
+
+        {% for k,v in pr.items %}
+        <tr>
+            <td>{{k}}</td>            
+            {% for i in v %}
+
+                {% if i|numeric %}
+                    <td>{{i | floatformat:2}}</td>
+                {% else %}
+                    <td>{{i}}</td>
+                {% endif %}
+
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    </center>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+<head>
+    {% load static %}  
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+<br><br>
+    <h1 align="center" >Employees report</h1>    
+</head>
+<body>
+    <center>   
+    <button class='btn btn-primary' style="cursor:hand" onclick="javascript:window.location.href='/hrms/manage'">Back</button>    
+    <br><br>
+    {{ message }}
+    <br>           
+        <table class="table table-condensed" style="width:800px" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+            </tr>
+            {% for e in employees %}
+            <tr>
+                <td>
+                    {{e.emp_id}}
+                </td>
+                <td>
+                    {{e.emp_name}}
+                </td>
+                
+                <td>
+                    {{e.department.dept_name}}
+                </td>
+
+                <td>
+                    {{e.email}}
+                </td>
+                <td>
+                    {{e.gender}}
+                </td>
+
+                <td><a href="/hrms/employees/edit/{{e.emp_id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                <td><a href="/hrms/employees/delete/{{e.emp_id}}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        
+
+            </tr>
+
+            {% endfor %}
+
+
+        </table>
+    </center>
+</body>
+</html>
